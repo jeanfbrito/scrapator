@@ -1,0 +1,35 @@
+<div class="page-header">
+  <%= link_to scrapes_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_scrape_path(@scrape), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show scrape</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Name:</dt>
+  <dd><%= @scrape.name %></dd>
+
+  <dt>Url:</dt>
+  <dd><%= @scrape.url %></dd>
+
+  <dt>Xpath:</dt>
+  <dd><%= @scrape.xpath %></dd>
+
+  <dt>Config value:</dt>
+  <dd><%= @scrape.config_value %></dd>
+
+  <dt>Read value:</dt>
+  <dd><%= @scrape.read_value %></dd>
+
+  <dt>Status:</dt>
+  <dd><%= @scrape.status %></dd>
+
+  <dt>Last read:</dt>
+  <dd><%= @scrape.last_read %></dd>
+
+</dl>

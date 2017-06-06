@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  url: MyText
+  xpath: MyString
+  config_value: MyText
+  read_value: MyText
+  status: 1
+  last_read: 2017-06-05 23:40:48
+
+two:
+  name: MyString
+  url: MyText
+  xpath: MyString
+  config_value: MyText
+  read_value: MyText
+  status: 1
+  last_read: 2017-06-05 23:40:48

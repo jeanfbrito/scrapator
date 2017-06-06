@@ -1,0 +1,17 @@
+<%= simple_form_for(@scrape) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :url %>
+    <%= f.input :xpath %>
+    <%= f.input :config_value %>
+    <%= f.input :read_value %>
+    <%= f.input :status %>
+    <%= f.input :last_read %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

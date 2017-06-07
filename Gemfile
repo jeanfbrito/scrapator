@@ -13,6 +13,7 @@ gem 'kaminari'
 gem 'watir'
 gem 'nokogiri'
 gem 'delayed_job_active_record'
+gem 'enumerize'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

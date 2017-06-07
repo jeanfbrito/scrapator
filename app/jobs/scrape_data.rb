@@ -1,8 +1,7 @@
-
-namespace :scrape do
-  desc "TODO"
-  task test: :environment do
-    item = Scrape.find(2)
+class ScrapeData < ApplicationJob
+  queue_as :default
+  def perform(id)
+    item = Scrape.find(id)
     puts item.name
     puts item.url
     puts item.xpath
@@ -15,5 +14,4 @@ namespace :scrape do
 
     browser.quit
   end
-
 end

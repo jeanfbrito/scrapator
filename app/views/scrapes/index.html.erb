@@ -12,12 +12,12 @@
       <tr>
             <th>Name</th>
             <th>Url</th>
-            <th>Xpath</th>
             <th>Config value</th>
             <th>Read value</th>
             <th>Status</th>
             <th>Last read</th>
             <th></th>
+        <th></th>
         <th></th>
         <th></th>
       </tr>
@@ -27,11 +27,11 @@
       <%= content_tag_for(:tr, @scrapes) do |scrape| %>
             <td><%= scrape.name %></td>
             <td><%= scrape.url %></td>
-            <td><%= scrape.xpath %></td>
             <td><%= scrape.config_value %></td>
             <td><%= scrape.read_value %></td>
             <td><%= scrape.status %></td>
             <td><%= scrape.last_read %></td>
+            <td><%= link_to 'Scrape', scrape_scrape_path(scrape), method: :post %></td>
             <td><%= link_to 'Show', scrape %></td>
         <td><%= link_to 'Edit', edit_scrape_path(scrape) %></td>
         <td><%= link_to 'Destroy', scrape, method: :delete, data: { confirm: 'Are you sure?' } %></td>

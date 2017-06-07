@@ -21,6 +21,12 @@ class ScrapesController < ApplicationController
   def edit
   end
 
+  def scrape
+    ScrapeData.new.delay.perform(params[:id])
+    redirect_to scrapes_path
+
+  end
+
   # POST /scrapes
   # POST /scrapes.json
   def create

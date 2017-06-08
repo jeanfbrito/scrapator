@@ -29,7 +29,18 @@
             <td><%= link_to scrape.url, scrape.url, target: "_blank" %></td>
             <td><%= scrape.config_value %></td>
             <td><%= scrape.read_value %></td>
-            <td><%= scrape.status.text %></td>
+            <td><h4><span class="label
+              <% if scrape.status.similar? %>
+                label-success
+              <% elsif scrape.status.changed? %>
+                label-warning
+              <% elsif scrape.status.unscraped? %>
+                  label-primary
+                <% else %>
+                label-danger
+              <% end %>
+              "><%= scrape.status.text %></span></h4>
+            </td>
             <td><%= scrape.last_read %></td>
             <td><%= link_to 'Scrape', scrape_scrape_path(scrape), method: :post %></td>
             <td><%= link_to 'Show', scrape %></td>

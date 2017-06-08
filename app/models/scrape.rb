@@ -1,4 +1,7 @@
 class Scrape < ApplicationRecord
+
+  belongs_to :user
+
   extend Enumerize
   enumerize :status, :in => {
     :unscraped => 0,

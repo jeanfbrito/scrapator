@@ -5,7 +5,7 @@ class ScrapesController < ApplicationController
   # GET /scrapes
   # GET /scrapes.json
   def index
-    @scrapes = Scrape.all
+    @scrapes = current_user.scrapes.all
   end
 
   # GET /scrapes/1
@@ -32,9 +32,11 @@ class ScrapesController < ApplicationController
   # POST /scrapes.json
   def create
     @scrape = Scrape.new(scrape_params)
+    @scrape.user = current_user
 
     respond_to do |format|
       if @scrape.save
+        ScrapeData.new.delay.perform(@scrape.id)
         format.html { redirect_to @scrape, notice: 'Scrape was successfully created.' }
         format.json { render :show, status: :created, location: @scrape }
       else
@@ -49,6 +51,7 @@ class ScrapesController < ApplicationController
   def update
     respond_to do |format|
       if @scrape.update(scrape_params)
+        ScrapeData.new.delay.perform(@scrape.id)
         format.html { redirect_to @scrape, notice: 'Scrape was successfully updated.' }
         format.json { render :show, status: :ok, location: @scrape }
       else
@@ -76,6 +79,6 @@ class ScrapesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def scrape_params
-      params.require(:scrape).permit(:name, :url, :xpath, :config_value, :read_value, :status, :last_read)
+      params.require(:scrape).permit(:name, :user, :url, :xpath, :config_value, :read_value, :status, :last_read)
     end
 end

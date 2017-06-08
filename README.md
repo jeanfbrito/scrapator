@@ -20,7 +20,6 @@ And deploy. Worked for me on Phantom 2.1.1
 * Database creation
 
 * Database initialization
-
 heroku run rake db:migrate
 
 * How to run the test suite
@@ -30,3 +29,6 @@ heroku run rake db:migrate
 * Deployment instructions
 
 * ...
+
+* App to extract XPath on HTML
+https://chrome.google.com/webstore/detail/xpath-helper/hgimnogjllphhhkhlmebbmlgjoejdpjl

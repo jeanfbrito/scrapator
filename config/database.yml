@@ -29,4 +29,6 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: scrapator_production
+  username: scrapator
+  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>

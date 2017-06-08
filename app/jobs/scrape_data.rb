@@ -1,6 +1,7 @@
 class ScrapeData < ApplicationJob
   queue_as :default
   def perform(id)
+    #items = Scrape.where("last_read < ?", 60.minutes.ago)S
     item = Scrape.find(id)
     puts item.name
     puts item.url

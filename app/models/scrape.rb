@@ -4,6 +4,6 @@ class Scrape < ApplicationRecord
     :unscraped => 0,
     :similar => 1,
     :changed => 2,
-    :notfound = > 3
+    :notfound => 3
     }, default: :unscraped, scope: true
 end

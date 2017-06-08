@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users
+  root to: "scrapes#index"
   resources :scrapes do
     member do
       post "scrape", to: "scrapes#scrape", as: "scrape"

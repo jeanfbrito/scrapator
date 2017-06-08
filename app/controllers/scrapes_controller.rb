@@ -1,4 +1,5 @@
 class ScrapesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_scrape, only: [:show, :edit, :update, :destroy]
 
   # GET /scrapes

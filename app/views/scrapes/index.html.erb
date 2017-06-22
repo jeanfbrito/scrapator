@@ -16,7 +16,7 @@
             <th>Read value</th>
             <th>Status</th>
             <th>Last read</th>
-            <th></th>
+            <th>Screen</th>
         <th></th>
         <th></th>
         <th></th>
@@ -41,7 +41,8 @@
               <% end %>
               "><%= scrape.status.text %></span></h4>
             </td>
-            <td><%= time_ago_in_words(scrape.last_read) %></td>
+            <td><%= time_ago_in_words(scrape.last_read) if scrape.last_read %></td>
+            <td><%= link_to "Open", "/screenshots/#{scrape.screenshot}", target: "_blank" if scrape.screenshot %></td>
             <td><%= link_to 'Scrape', scrape_scrape_path(scrape), method: :post %></td>
             <td><%= link_to 'Show', scrape %></td>
         <td><%= link_to 'Edit', edit_scrape_path(scrape) %></td>

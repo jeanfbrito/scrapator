@@ -16,17 +16,14 @@
             <th>Read value</th>
             <th>Status</th>
             <th>Last read</th>
-            <th>Screen</th>
-        <th></th>
-        <th></th>
-        <th></th>
+            <th>Screenshot</th>
       </tr>
     </thead>
 
     <tbody>
       <%= content_tag_for(:tr, @scrapes) do |scrape| %>
             <td><%= scrape.name %></td>
-            <td><%= link_to scrape.url, scrape.url, target: "_blank" %></td>
+            <td><%= link_to "Link", scrape.url, target: "_blank" %></td>
             <td><%= scrape.config_value %></td>
             <td><%= scrape.read_value %></td>
             <td><h4><span class="label

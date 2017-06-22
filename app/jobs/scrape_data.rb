@@ -15,6 +15,10 @@ class ScrapeData < ApplicationJob
       File.delete("public/screenshots/#{item.screenshot}") if File.exist?("public/screenshots/#{item.screenshot}")
     end
     browser.screenshot.save ("public/screenshots/#{filename}.png")
+    #file = File.new("public/html/#{filename}.html", "w")
+    #file.puts(browser.html)
+    #file.close
+
     item.screenshot = "#{filename}.png"
 
     page_html = Nokogiri::HTML.parse(browser.html)
@@ -27,10 +31,13 @@ class ScrapeData < ApplicationJob
 
     if item.config_value.strip == item.read_value.strip
       item.status = 1
+      puts "similar"
     elsif item.read_value.strip == ''
       item.status = 3
+      puts "not found"
     else
       item.status = 2
+      puts "changed"
     end
 
     item.save

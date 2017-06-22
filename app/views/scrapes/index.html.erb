@@ -41,7 +41,7 @@
               <% end %>
               "><%= scrape.status.text %></span></h4>
             </td>
-            <td><%= scrape.last_read %></td>
+            <td><%= time_ago_in_words(scrape.last_read) %></td>
             <td><%= link_to 'Scrape', scrape_scrape_path(scrape), method: :post %></td>
             <td><%= link_to 'Show', scrape %></td>
         <td><%= link_to 'Edit', edit_scrape_path(scrape) %></td>

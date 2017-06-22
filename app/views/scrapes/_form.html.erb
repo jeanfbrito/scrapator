@@ -7,8 +7,8 @@
     <%= f.input :xpath %>
     <%= f.input :config_value %>
     <%= f.input :read_value %>
-    <%= f.input :status %>
-    <%= f.input :last_read %>
+    <%= f.input :status, :as => :hidden, :input_html => { :value => 0 } %>
+
   </div>
 
   <div class="form-actions">

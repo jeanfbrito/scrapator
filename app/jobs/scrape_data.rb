@@ -18,7 +18,7 @@ class ScrapeData < ApplicationJob
     item.read_value = read_value
     item.last_read = DateTime.now
 
-    if item.config_value == item.read_value
+    if item.config_value.strip == item.read_value.strip
       item.status = 1
     else
       item.status = 2

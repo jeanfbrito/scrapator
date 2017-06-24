@@ -9,7 +9,7 @@ class ScrapeData < ApplicationJob
     #switches = ['--proxy=69.106.88.7:60199', '--proxy-auth=username:password123']
     #browser = Watir::Browser.new :phantomjs, :args => switches
     browser = Watir::Browser.new( :phantomjs,
-        args: '--proxy=170.81.42.166:3128'
+        args: '--proxy=177.99.161.60:3128'
     )
 
     filename = DateTime.now.strftime("%d%b%Y%H%M%S")

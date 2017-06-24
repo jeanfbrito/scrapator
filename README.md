@@ -32,3 +32,8 @@ heroku run rake db:migrate
 
 * App to extract XPath on HTML
 https://chrome.google.com/webstore/detail/xpath-helper/hgimnogjllphhhkhlmebbmlgjoejdpjl
+
+https://www.sslproxies.org/
+
+nohup rake jobs:work &
+ nohup: ignoring input and appending output to `nohup.out'

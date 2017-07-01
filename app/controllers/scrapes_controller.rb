@@ -6,6 +6,7 @@ class ScrapesController < ApplicationController
   # GET /scrapes.json
   def index
     @scrapes = current_user.scrapes.all
+    @jobs = Delayed::Job.all
   end
 
   # GET /scrapes/1

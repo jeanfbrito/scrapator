@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsSettingsUi::Engine, at: 'settings'
   devise_for :users
   root to: "scrapes#index"
   resources :scrapes do

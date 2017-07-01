@@ -14,6 +14,8 @@ gem 'watir'
 gem 'nokogiri'
 gem 'delayed_job_active_record'
 gem 'enumerize'
+
+gem 'rails-settings-ui'
 gem "rails-settings-cached"
 
 gem 'devise'

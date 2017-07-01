@@ -26,11 +26,22 @@
 
 development:
   adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+  username: pg
+  password: pg
   database: scrapator_development
   pool: 5
   timeout: 5000
+
 test:
   adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+  username: pg
+  password: pg
   database: scrapator_test
   pool: 5
   timeout: 5000

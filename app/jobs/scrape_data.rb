@@ -24,6 +24,8 @@ class ScrapeData < ApplicationJob
     browser.goto(item.url)
     #browser.wait_until(15) { browser.h1.text != 'Main Page' }
     #browser.wait_until(60) { browser.text_field.exists? }
+    browser.element(:xpath => item.xpath).wait_until_present(timeout=30)
+    
     if(item.screenshot?)
       File.delete("public/screenshots/#{item.screenshot}") if File.exist?("public/screenshots/#{item.screenshot}")
     end

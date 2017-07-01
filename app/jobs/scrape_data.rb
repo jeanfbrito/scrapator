@@ -8,7 +8,7 @@ class ScrapeData < ApplicationJob
     #puts item.xpath
     #switches = ['--proxy=69.106.88.7:60199', '--proxy-auth=username:password123']
     #browser = Watir::Browser.new :phantomjs, :args => switches
-    Selenium::WebDriver::PhantomJS.path="../../bin/phantomjs"
+    Selenium::WebDriver::PhantomJS.path="./bin/phantomjs"
     browser = Watir::Browser.new( :phantomjs,
         args: '--proxy=177.99.161.60:3128'
     )

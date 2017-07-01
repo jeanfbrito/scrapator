@@ -4,7 +4,7 @@ class ScrapeProxy < ApplicationJob
     Selenium::WebDriver::PhantomJS.path="./bin/phantomjs"
     browser = Watir::Browser.new :phantomjs
 
-    proxyFileName = "proxynow.txt"
+    #proxyFileName = "proxynow.txt"
 
     browser.goto("http://www.freeproxylists.net/?c=BR&pr=HTTPS&u=50&s=u")
     ipXpath = "/html/body/div/div[2]/table/tbody/tr[2]/td[1]/a"
@@ -18,12 +18,15 @@ class ScrapeProxy < ApplicationJob
 
    puts "proxy=#{ip}:#{port}"
 
-    file = File.new("public/#{proxyFileName}", "w")
-    file.puts("#{ip}:#{port}")
-    file.close
+   Setting.proxyIp = ip
+   Setting.proxyPort = port
 
-    file_content = File.read("public/#{proxyFileName}");
-    puts file_content;
+    #file = File.new("public/#{proxyFileName}", "w")
+    #file.puts("#{ip}:#{port}")
+    #file.close
+
+    #file_content = File.read("public/#{proxyFileName}");
+    #puts file_content;
 
     browser.quit
   end

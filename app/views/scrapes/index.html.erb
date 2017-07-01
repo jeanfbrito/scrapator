@@ -12,10 +12,10 @@
       <tr>
             <th>Name</th>
             <th>Url</th>
-            <th>Config value</th>
-            <th>Read value</th>
             <th>Status</th>
             <th>Last read</th>
+            <th>Config value</th>
+            <th>Read value</th>
             <th>Screenshot</th>
       </tr>
     </thead>
@@ -24,8 +24,6 @@
       <%= content_tag_for(:tr, @scrapes) do |scrape| %>
             <td><%= scrape.name %></td>
             <td><%= link_to "Link", scrape.url, target: "_blank" %></td>
-            <td><%= scrape.config_value %></td>
-            <td><%= scrape.read_value %></td>
             <td><h4><span class="label
               <% if scrape.status.similar? %>
                 label-success
@@ -39,6 +37,8 @@
               "><%= scrape.status.text %></span></h4>
             </td>
             <td><%= time_ago_in_words(scrape.last_read) if scrape.last_read %></td>
+            <td><%= scrape.config_value %></td>
+            <td><%= scrape.read_value %></td>
             <td><%= link_to "Open", "/screenshots/#{scrape.screenshot}", target: "_blank" if scrape.screenshot %></td>
             <td><%= link_to 'Scrape', scrape_scrape_path(scrape), method: :post %></td>
             <td><%= link_to 'Show', scrape %></td>

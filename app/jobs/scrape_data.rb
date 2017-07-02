@@ -26,7 +26,20 @@ class ScrapeData < ApplicationJob
 
     filename = DateTime.now.strftime("%d%b%Y%H%M%S")
 
-    browser.goto(item.url)
+    #browser.goto(item.url)
+
+    begin
+      browser.goto(item.url)
+    rescue => error
+      tryLeft -= 1
+
+      if tryLeft >= 0
+        sleep 1
+        retry
+      end
+      Timeout::timeout(2) { browser.close }
+    end
+
     #browser.wait_until(15) { browser.h1.text != 'Main Page' }
     #browser.wait_until(60) { browser.text_field.exists? }
     begin

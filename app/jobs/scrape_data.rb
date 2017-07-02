@@ -63,7 +63,7 @@ class ScrapeData < ApplicationJob
     end
 
     if (item.status != 1)
-      bot.send_message chat_id: item.user.telegramId, text: "Warning! \n#{item.name} Changed it status to: #{item.status} \nTake a look: #{item.url}"
+      Telegram.bot.send_message chat_id: item.user.telegramId, text: "Warning! \n#{item.name} Changed it status to: #{item.status} \nTake a look: #{item.url}"
     end
 
     item.save

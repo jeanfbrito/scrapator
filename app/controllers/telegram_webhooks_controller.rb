@@ -29,12 +29,13 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     scrapes = user.scrapes
     scrapes.each do |scrape|
       #bot.send_message chat_id: from["id"], text: "#{scrape.name} Status: #{scrape.status} Last Read: #{time_ago_in_words(scrape.last_read) if scrape.last_read } ago"
+      #respond_with :message, text: '<b>bold</b>', parse_mode: :HTML
       respond_with :message, text:
-      "Scrape: #{scrape.name} \nStatus: #{scrape.status} \nLast Read: #{time_ago_in_words(scrape.last_read) if scrape.last_read } ago", reply_markup: {
+      "Scrape: <b>#{scrape.name}</b> \nStatus: <b>#{scrape.status}</b> \nLast Read: <b>#{time_ago_in_words(scrape.last_read) if scrape.last_read } ago</b>", reply_markup: {
         inline_keyboard: [
           [{text: "Link", url: scrape.url}],
         ],
-      }
+      }, parse_mode: :HTML
     end
   end
 

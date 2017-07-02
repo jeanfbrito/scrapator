@@ -44,13 +44,13 @@ class ScrapeData < ApplicationJob
     #browser.wait_until(60) { browser.text_field.exists? }
     tryLeft = 3
     begin
-      browser.element(:xpath => item.xpath).wait_until_present(timeout=120)
+      browser.element(:xpath => item.xpath).wait_until_present(timeout=20)
     rescue
       puts "NOT FOUND! Waited twenty seconds without seeing the xpath"
       tryLeft -= 1
 
       if tryLeft >= 0
-        sleep 1
+        sleep 10
         retry
       end
     end

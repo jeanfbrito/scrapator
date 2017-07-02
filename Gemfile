@@ -18,6 +18,8 @@ gem 'enumerize'
 gem 'rails-settings-ui'
 gem "rails-settings-cached"
 
+gem 'telegram-bot'
+
 gem 'devise'
 
 gem 'pg'

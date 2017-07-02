@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  telegram_webhooks TelegramWebhooksController
   mount RailsSettingsUi::Engine, at: 'settings'
   devise_for :users
   root to: "scrapes#index"

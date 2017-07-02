@@ -6,6 +6,8 @@ class ScrapeData < ApplicationJob
     item = Scrape.find(id)
     puts item.name
     puts item.url
+
+    last_status = item.status
     #puts item.xpath
     #switches = ['--proxy=69.106.88.7:60199', '--proxy-auth=username:password123']
     #browser = Watir::Browser.new :phantomjs, :args => switches
@@ -62,7 +64,7 @@ class ScrapeData < ApplicationJob
       puts "changed"
     end
 
-    if (item.status != 1)
+    if (item.status != 1 && item.status != last_status )
       Telegram.bot.send_message chat_id: item.user.telegramId, text: "Warning! \nThe scrape #{item.name} \nChanged it status to #{item.status} \nTake a look: #{item.url}"
     end
 

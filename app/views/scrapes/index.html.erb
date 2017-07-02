@@ -72,3 +72,15 @@
     </tbody>
   </table>
 </div>
+
+<script>
+  if(!window.reloadTimer) {
+    var SECONDS = 10;
+    window.reloadTimer=setTimeout(function(){
+      console.log("Reload!");
+      window.reloadTimer=undefined;
+        Turbolinks.visit(location.toString(),{action: "replace"});
+    }, SECONDS * 1000);
+    document.addEventListener("turbolinks:visit",function() {clearTimeout(window.reloadTimer);window.reloadTimer=undefined;});
+  }
+</script>

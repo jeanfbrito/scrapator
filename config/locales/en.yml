@@ -30,7 +30,7 @@ en:
     help:
       content: |
         Available cmds:
-        /memo %text% - Saves text to session.
+        /register email@example.com - Register your telegram to your user.
         /remind_me - Replies with text from session.
         /keyboard - Simple keyboard.
         /inline_keyboard - Inline keyboard example.
@@ -63,7 +63,7 @@ en:
     remind_me:
       nothing: Nothing to remind
     start:
-      content: Hi there!
+      content: Hi there! Ask for /help if you need it!
   errors:
     form_hash?: Invalid hash
     int?: Invalid numeric

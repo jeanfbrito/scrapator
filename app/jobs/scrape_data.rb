@@ -1,4 +1,5 @@
 class ScrapeData < ApplicationJob
+  require 'telegram/bot'
   queue_as :default
   def perform(id)
     #items = Scrape.where("last_read < ?", 60.minutes.ago)S
@@ -59,6 +60,10 @@ class ScrapeData < ApplicationJob
     else
       item.status = 2
       puts "changed"
+    end
+
+    if (item.status != 1)
+      bot.send_message chat_id: item.user.telegramId, text: "Warning! \n#{item.name} Changed it status to: #{item.status} \nTake a look: #{item.url}"
     end
 
     item.save

@@ -1,6 +1,42 @@
 class TelegramWebhooksController < Telegram::Bot::UpdatesController
+  include ActionView::Helpers::DateHelper
   include Telegram::Bot::UpdatesController::MessageContext
   context_to_action!
+
+  def register(*args)
+    if args.any?
+      email_address = args.join(' ')
+      puts email_address
+      if(user = User.find_by :email => email_address)
+        puts user.email
+        puts chat
+        puts from
+        bot.send_message chat_id: from["id"], text: 'user registered'
+        #user.settings.telegramId = from["id"]
+        user.telegramId = from["id"]
+        user.save
+        puts user.telegramId
+      else
+        respond_with :message, text: "user not found"
+      end
+    else
+      respond_with :message, text: "send /register email@example.com"
+    end
+  end
+
+  def list(*)
+    user = User.find_by :telegramId => from["id"]
+    scrapes = user.scrapes
+    scrapes.each do |scrape|
+      #bot.send_message chat_id: from["id"], text: "#{scrape.name} Status: #{scrape.status} Last Read: #{time_ago_in_words(scrape.last_read) if scrape.last_read } ago"
+      respond_with :message, text:
+      "#{scrape.name} \nStatus: #{scrape.status} \nLast Read: #{time_ago_in_words(scrape.last_read) if scrape.last_read } ago", reply_markup: {
+        inline_keyboard: [
+          [{text: "Link", url: scrape.url}],
+        ],
+      }
+    end
+  end
 
   def start(*)
     respond_with :message, text: t('.content')

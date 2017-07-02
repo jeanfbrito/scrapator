@@ -27,7 +27,7 @@ class ScrapeData < ApplicationJob
     filename = DateTime.now.strftime("%d%b%Y%H%M%S")
 
     #browser.goto(item.url)
-
+    tryLeft = 3
     begin
       browser.goto(item.url)
     rescue => error
@@ -42,10 +42,17 @@ class ScrapeData < ApplicationJob
 
     #browser.wait_until(15) { browser.h1.text != 'Main Page' }
     #browser.wait_until(60) { browser.text_field.exists? }
+    tryLeft = 3
     begin
-      browser.element(:xpath => item.xpath).wait_until_present(timeout=60)
+      browser.element(:xpath => item.xpath).wait_until_present(timeout=20)
     rescue
       puts "NOT FOUND! Waited twenty seconds without seeing the xpath"
+      tryLeft -= 1
+
+      if tryLeft >= 0
+        sleep 1
+        retry
+      end
     end
 
     if(item.screenshot?)

@@ -34,7 +34,7 @@ class ScrapeData < ApplicationJob
       tryLeft -= 1
 
       if tryLeft >= 0
-        sleep 1
+        sleep 10
         retry
       end
       Timeout::timeout(2) { browser.close }
@@ -44,7 +44,7 @@ class ScrapeData < ApplicationJob
     #browser.wait_until(60) { browser.text_field.exists? }
     tryLeft = 3
     begin
-      browser.element(:xpath => item.xpath).wait_until_present(timeout=20)
+      browser.element(:xpath => item.xpath).wait_until_present(timeout=120)
     rescue
       puts "NOT FOUND! Waited twenty seconds without seeing the xpath"
       tryLeft -= 1

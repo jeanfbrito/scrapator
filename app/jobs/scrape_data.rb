@@ -66,7 +66,7 @@ class ScrapeData < ApplicationJob
 
     if (item.status != 1 && item.status != last_status )
       #Telegram.bot.send_message chat_id: item.user.telegramId, text: "Warning! \nThe scrape <b>#{item.name}</b> \nNew status is <b>#{item.status}</b> \nTake a look: #{item.url}", parse_mode: :HTML
-      if(item.user.telegramId?) #if telegramid not set, dont try to message with warning
+      if(item.user.telegramId.present?) #if telegramid not set, dont try to message with warning
         Telegram.bot.send_message chat_id: item.user.telegramId, text: "Warning! \nThe scrape <b>#{item.name}</b> \nNew status is <b>#{item.status}</b> \nTake a look at: #{item.url}", parse_mode: :HTML
       end
     end

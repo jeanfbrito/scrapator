@@ -44,6 +44,13 @@ class ScrapeData < ApplicationJob
       browser.quit
     end
 
+    tryLeft = 6
+    loop do
+      tryLeft -= 1
+      sleep 10
+      break if browser.element(:xpath => item.xpath)present? || tryLeft <= 0
+    end
+
     #browser.wait_until(15) { browser.h1.text != 'Main Page' }
     #browser.wait_until(60) { browser.text_field.exists? }
     #browser.element(:xpath => item.xpath).wait_until_present(timeout=20)

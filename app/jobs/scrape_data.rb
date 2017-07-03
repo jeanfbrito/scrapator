@@ -37,7 +37,7 @@ class ScrapeData < ApplicationJob
         sleep 10
         retry
       end
-      Timeout::timeout(2) { browser.close }
+      browser.service.process.send_signal(signal.SIGTERM)
     end
 
     #browser.wait_until(15) { browser.h1.text != 'Main Page' }
@@ -92,7 +92,7 @@ class ScrapeData < ApplicationJob
     end
 
     item.save
-
+    browser.service.process.send_signal(signal.SIGTERM)
     browser.quit
   end
 end

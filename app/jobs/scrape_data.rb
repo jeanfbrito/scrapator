@@ -42,17 +42,10 @@ class ScrapeData < ApplicationJob
 
     #browser.wait_until(15) { browser.h1.text != 'Main Page' }
     #browser.wait_until(60) { browser.text_field.exists? }
-    tryLeft = 3
     begin
-      browser.element(:xpath => item.xpath).wait_until_present(timeout=20)
+      browser.element(:xpath => item.xpath).wait_until_present(timeout=120)
     rescue
       puts "NOT FOUND! Waited twenty seconds without seeing the xpath"
-      tryLeft -= 1
-
-      if tryLeft >= 0
-        sleep 10
-        retry
-      end
     end
 
     if(item.screenshot?)

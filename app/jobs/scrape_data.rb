@@ -41,6 +41,7 @@ class ScrapeData < ApplicationJob
         sleep 5
         retry
       end
+      browser.quit
     end
 
     #browser.wait_until(15) { browser.h1.text != 'Main Page' }

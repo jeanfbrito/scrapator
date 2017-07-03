@@ -23,10 +23,13 @@ class ScrapeData < ApplicationJob
     browser = Watir::Browser.new( :phantomjs,
         args: "--proxy=#{proxy}"
     )
+    Watir.default_timeout = 90
+    browser.window.maximize
 
     filename = DateTime.now.strftime("%d%b%Y%H%M%S")
 
     browser.goto(item.url)
+    sleep 20
     # tryLeft = 3
     # begin
     #   browser.goto(item.url)
@@ -42,50 +45,47 @@ class ScrapeData < ApplicationJob
 
     #browser.wait_until(15) { browser.h1.text != 'Main Page' }
     #browser.wait_until(60) { browser.text_field.exists? }
-    begin
-      browser.element(:xpath => item.xpath).wait_until_present(timeout=120)
-    rescue
-      puts "NOT FOUND! Waited twenty seconds without seeing the xpath"
-    end
+    browser.element(:xpath => item.xpath).wait_until_present(timeout=20)
 
-    if(item.screenshot?)
-      File.delete("public/screenshots/#{item.screenshot}") if File.exist?("public/screenshots/#{item.screenshot}")
-    end
-    browser.screenshot.save ("public/screenshots/#{filename}.png")
-    #file = File.new("public/html/#{filename}.html", "w")
-    #file.puts(browser.html)
-    #file.close
-
-    item.screenshot = "#{filename}.png"
-
-    page_html = Nokogiri::HTML.parse(browser.html)
-    puts page_html.xpath(item.xpath).inner_text
-
-    read_value = page_html.xpath(item.xpath).inner_text
-
-    item.read_value = read_value
-    item.last_read = DateTime.now
-
-    if item.config_value.strip == item.read_value.strip
-      item.status = 1
-      puts "similar"
-    elsif item.read_value.strip == ''
-      item.status = 3
-      puts "not found"
-    else
-      item.status = 2
-      puts "changed"
-    end
-
-    if (item.status != 1 && item.status != last_status )
-      #Telegram.bot.send_message chat_id: item.user.telegramId, text: "Warning! \nThe scrape <b>#{item.name}</b> \nNew status is <b>#{item.status}</b> \nTake a look: #{item.url}", parse_mode: :HTML
-      if(item.user.telegramId.present?) #if telegramid not set, dont try to message with warning
-        Telegram.bot.send_message chat_id: item.user.telegramId, text: "<b>Warning!</b> \nThe scrape <b>#{item.name}</b> \nNew status is <b>#{item.status}</b> \nTake a look at: #{item.url}", parse_mode: :HTML
+      if(browser.element(:xpath => item.xpath).exists?)
+      if(item.screenshot?)
+        File.delete("public/screenshots/#{item.screenshot}") if File.exist?("public/screenshots/#{item.screenshot}")
       end
-    end
+      browser.screenshot.save ("public/screenshots/#{filename}.png")
+      #file = File.new("public/html/#{filename}.html", "w")
+      #file.puts(browser.html)
+      #file.close
 
-    item.save
-    browser.service.process.send_signal(signal.SIGTERM)
+      item.screenshot = "#{filename}.png"
+
+      page_html = Nokogiri::HTML.parse(browser.html)
+      puts page_html.xpath(item.xpath).inner_text
+
+      read_value = page_html.xpath(item.xpath).inner_text
+
+      item.read_value = read_value
+      item.last_read = DateTime.now
+
+      if item.config_value.strip == item.read_value.strip
+        item.status = 1
+        puts "similar"
+      elsif item.read_value.strip == ''
+        item.status = 3
+        puts "not found"
+      else
+        item.status = 2
+        puts "changed"
+      end
+
+      if (item.status != 1 && item.status != last_status )
+        #Telegram.bot.send_message chat_id: item.user.telegramId, text: "Warning! \nThe scrape <b>#{item.name}</b> \nNew status is <b>#{item.status}</b> \nTake a look: #{item.url}", parse_mode: :HTML
+        if(item.user.telegramId.present?) #if telegramid not set, dont try to message with warning
+          Telegram.bot.send_message chat_id: item.user.telegramId, text: "<b>Warning!</b> \nThe scrape <b>#{item.name}</b> \nNew status is <b>#{item.status}</b> \nTake a look at: #{item.url}", parse_mode: :HTML
+        end
+      end
+
+      item.save
+    end
     browser.quit
   end
 end

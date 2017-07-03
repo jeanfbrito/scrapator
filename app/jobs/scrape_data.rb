@@ -48,7 +48,7 @@ class ScrapeData < ApplicationJob
     loop do
       tryLeft -= 1
       sleep 10
-      break if browser.element(:xpath => item.xpath)present? || tryLeft <= 0
+      break if browser.element(:xpath => item.xpath).present? || tryLeft <= 0
     end
 
     #browser.wait_until(15) { browser.h1.text != 'Main Page' }

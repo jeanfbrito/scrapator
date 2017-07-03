@@ -28,26 +28,24 @@ class ScrapeData < ApplicationJob
 
     filename = DateTime.now.strftime("%d%b%Y%H%M%S")
 
-    browser.goto(item.url)
-    sleep 20
-    # tryLeft = 3
-    # begin
-    #   browser.goto(item.url)
-    # rescue => error
-    #   tryLeft -= 1
-    #
-    #   if tryLeft >= 0
-    #     sleep 10
-    #     retry
-    #   end
-    #   browser.service.process.send_signal(signal.SIGTERM)
-    # end
+    # browser.goto(item.url)
+    # sleep 20
+    tryLeft = 3
+    begin
+      browser.goto(item.url)
+    rescue => error
+      tryLeft -= 1
+
+      if tryLeft >= 0
+        sleep 20
+        retry
+      end
+    end
 
     #browser.wait_until(15) { browser.h1.text != 'Main Page' }
     #browser.wait_until(60) { browser.text_field.exists? }
     browser.element(:xpath => item.xpath).wait_until_present(timeout=20)
 
-      if(browser.element(:xpath => item.xpath).exists?)
       if(item.screenshot?)
         File.delete("public/screenshots/#{item.screenshot}") if File.exist?("public/screenshots/#{item.screenshot}")
       end
@@ -85,7 +83,6 @@ class ScrapeData < ApplicationJob
       end
 
       item.save
-    end
     browser.quit
   end
 end

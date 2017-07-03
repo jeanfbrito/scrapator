@@ -33,7 +33,7 @@ class ScrapeData < ApplicationJob
     tryLeft = 3
     begin
       browser.goto(item.url)
-      browser.element(:xpath => item.xpath).wait_until_present(timeout=120)
+      #browser.element(:xpath => item.xpath).wait_until_present(timeout=120)
     rescue => error
       tryLeft -= 1
 

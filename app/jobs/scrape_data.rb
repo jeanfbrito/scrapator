@@ -33,18 +33,19 @@ class ScrapeData < ApplicationJob
     tryLeft = 3
     begin
       browser.goto(item.url)
+      browser.element(:xpath => item.xpath).wait_until_present(timeout=120)
     rescue => error
       tryLeft -= 1
 
       if tryLeft >= 0
-        sleep 20
+        sleep 5
         retry
       end
     end
 
     #browser.wait_until(15) { browser.h1.text != 'Main Page' }
     #browser.wait_until(60) { browser.text_field.exists? }
-    browser.element(:xpath => item.xpath).wait_until_present(timeout=20)
+    #browser.element(:xpath => item.xpath).wait_until_present(timeout=20)
 
       if(item.screenshot?)
         File.delete("public/screenshots/#{item.screenshot}") if File.exist?("public/screenshots/#{item.screenshot}")

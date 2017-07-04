@@ -7,9 +7,7 @@
   ],
   "scripts": {
     "dokku": {
-      "postdeploy": "bundle exec rake db:migrate",
-      "postdeploy":  "bundle exec rake jobs:clear",
-      "postdeploy":  "bundle exec rake scrape:start"
+      "postdeploy": "bundle exec rake db:migrate && bundle exec rake jobs:clear && bundle exec rake scrape:start"
     }
   }
 }

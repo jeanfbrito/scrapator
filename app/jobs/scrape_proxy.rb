@@ -29,6 +29,7 @@ class ScrapeProxy < ApplicationJob
     #puts file_content;
 
     browser.quit
+    ScrapeProxy.delay(run_at: 15.minutes.from_now).perform_later
+    system "pkill -f phantom"
   end
-  ScrapeProxy.delay(run_at: 15.minutes.from_now).perform_later
 end

@@ -18,6 +18,8 @@ gem 'enumerize'
 gem 'rails-settings-ui'
 gem "rails-settings-cached"
 
+gem "chromedriver-helper"
+
 gem 'telegram-bot'
 
 gem 'devise'

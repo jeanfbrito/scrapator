@@ -6,7 +6,7 @@ class ScrapeProxy < ApplicationJob
 
     #proxyFileName = "proxynow.txt"
 
-    browser.goto("http://www.freeproxylists.net/?c=BR&pr=HTTPS&u=50&s=u")
+    browser.goto("http://www.freeproxylists.net/?c=BR&pr=HTTPS&u=50&s=ts")
     ipXpath = "/html/body/div/div[2]/table/tbody/tr[2]/td[1]/a"
     portXpath = "/html/body/div/div[2]/table/tbody/tr[2]/td[2]"
 

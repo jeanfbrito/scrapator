@@ -47,11 +47,12 @@ class ScrapeData < ApplicationJob
     # sleep 20
     tryLeft = 3
     begin
+      puts "lets go to!"
       browser.goto(item.url)
       #browser.element(:xpath => item.xpath).wait_until_present(timeout=120)
     rescue => error
       tryLeft -= 1
-
+      puts "something went wrong! #{error}"
       if tryLeft >= 0
         sleep 5
         retry
@@ -63,6 +64,7 @@ class ScrapeData < ApplicationJob
     tryLeft = 6
     loop do
       tryLeft -= 1
+      puts "lets search for the element now!"
       sleep 10
       break if browser.element(:xpath => item.xpath).present? || tryLeft <= 0
     end

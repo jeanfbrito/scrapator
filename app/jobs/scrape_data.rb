@@ -35,6 +35,10 @@ class ScrapeData < ApplicationJob
     #options.add_argument("--proxy-server=#{proxy}")
     #driver = Selenium::WebDriver.for :chrome, options: options
     browser = Watir::Browser.new :chrome
+
+    Selenium::WebDriver::Chrome.path = '/usr/bin/google-chrome'
+    driver = Selenium::WebDriver.for :chrome
+    browser = Watir::Browser.new driver
     #browser = Watir::Browser.new( :chrome, desired_capabilities: %w(--headless --disable-gpu --start-maximized --disable-web-security --disable-extensions --ignore-certificate-errors --disable-popup-blocking --disable-translate --proxy-server=m#{proxy}))
 
     Watir.default_timeout = 180

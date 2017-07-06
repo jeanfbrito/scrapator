@@ -20,9 +20,10 @@ class ScrapeData < ApplicationJob
     puts proxy
 
     Selenium::WebDriver::PhantomJS.path="./bin/phantomjs"
-    browser = Watir::Browser.new( :chrome,
-        args: "--proxy=#{proxy}"
-    )
+    # browser = Watir::Browser.new( :chrome,
+    #     args: "--proxy=#{proxy}"
+    # )
+    browser = Watir::Browser.new :chrome, :switches => ["--proxy-server=#{proxy}"]
     Watir.default_timeout = 90
     browser.window.maximize
 

@@ -23,6 +23,8 @@ class ScrapeData < ApplicationJob
     # browser = Watir::Browser.new( :chrome,
     #     args: "--proxy=#{proxy}"
     # )
+    browser = Watir::Browser.new( :chrome, 
+              switches: %w(--start-maximized --disable-web-security --ignore-certificate-errors --disable-popup-blocking --disable-translate --proxy-server=m#{proxy}))
 
     Watir.default_timeout = 90
     browser.window.maximize

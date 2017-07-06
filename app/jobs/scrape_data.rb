@@ -27,13 +27,13 @@ class ScrapeData < ApplicationJob
     # browser = Watir::Browser.new( :chrome,
     #     args: "--proxy=#{proxy}"
     # )
-    options = Selenium::WebDriver::Chrome::Options.new
-    options.add_argument('--ignore-certificate-errors')
-    options.add_argument('--disable-popup-blocking')
-    options.add_argument('--disable-translate')
-    options.add_argument('--no-sandbox')
-    options.add_argument("--proxy-server=#{proxy}")
-    driver = Selenium::WebDriver.for :chrome, options: options
+    #options = Selenium::WebDriver::Chrome::Options.new
+    #options.add_argument('--ignore-certificate-errors')
+    #options.add_argument('--disable-popup-blocking')
+    #options.add_argument('--disable-translate')
+    #options.add_argument('--no-sandbox')
+    #options.add_argument("--proxy-server=#{proxy}")
+    #driver = Selenium::WebDriver.for :chrome, options: options
     browser = Watir::Browser.new :chrome
     #browser = Watir::Browser.new( :chrome, desired_capabilities: %w(--headless --disable-gpu --start-maximized --disable-web-security --disable-extensions --ignore-certificate-errors --disable-popup-blocking --disable-translate --proxy-server=m#{proxy}))
 

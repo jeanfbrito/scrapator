@@ -23,8 +23,6 @@ class ScrapeData < ApplicationJob
     # browser = Watir::Browser.new( :chrome,
     #     args: "--proxy=#{proxy}"
     # )
-    caps = Selenium::WebDriver::Chrome::Capabilities.chrome("chromeOptions" => {"args" => ['--start-maximized', "--disable-web-security", "--proxy-server=#{proxy}", "--proxy-server" ]})
-    browser = Watir::Browser.new :chrome, desired_capabilities: => caps
 
     Watir.default_timeout = 90
     browser.window.maximize

@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "dokku": {
-      "predeploy": "wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -  &&  sh -c 'echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list.d/google.list' && apt-get update && apt-get install google-chrome-stable",
+      "predeploy": "wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -  &&  add-apt-repository -y 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' && apt-get update && apt-get install -y google-chrome-stable",
       "postdeploy": "bundle exec rake db:migrate && bundle exec rake jobs:clear && bundle exec rake scrape:start"
     }
   }

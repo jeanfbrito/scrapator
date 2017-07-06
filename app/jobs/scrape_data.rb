@@ -18,7 +18,7 @@ class ScrapeData < ApplicationJob
 
     proxy = "#{Setting.proxyIp}:#{Setting.proxyPort}"
 
-    puts proxy
+    puts "using proxy: #{proxy}"
 
     headless = Headless.new
     headless.start

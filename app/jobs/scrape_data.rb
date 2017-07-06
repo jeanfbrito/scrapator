@@ -38,7 +38,7 @@ class ScrapeData < ApplicationJob
     browser = Watir::Browser.new :chrome
     #browser = Watir::Browser.new( :chrome, desired_capabilities: %w(--headless --disable-gpu --start-maximized --disable-web-security --disable-extensions --ignore-certificate-errors --disable-popup-blocking --disable-translate --proxy-server=m#{proxy}))
 
-    Watir.default_timeout = 90
+    Watir.default_timeout = 180
     browser.window.maximize
 
     filename = DateTime.now.strftime("%d%b%Y%H%M%S")

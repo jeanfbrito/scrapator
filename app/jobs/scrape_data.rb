@@ -30,6 +30,7 @@ class ScrapeData < ApplicationJob
 
     Selenium::WebDriver::Chrome.path = '/usr/bin/google-chrome'
     options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--user-data-dir=./tmp')
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--disable-popup-blocking')
     options.add_argument('--disable-translate')

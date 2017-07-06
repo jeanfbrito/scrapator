@@ -1,5 +1,6 @@
 class ScrapeData < ApplicationJob
   require 'telegram/bot'
+  require 'headless'
   queue_as :default
   def perform(id)
     #items = Scrape.where("last_read < ?", 60.minutes.ago)S
@@ -19,12 +20,23 @@ class ScrapeData < ApplicationJob
 
     puts proxy
 
+    headless = Headless.new
+    headless.start
+
     #Selenium::WebDriver::PhantomJS.path="./bin/phantomjs"
     # browser = Watir::Browser.new( :chrome,
     #     args: "--proxy=#{proxy}"
     # )
-    browser = Watir::Browser.new( :chrome,
-              switches: %w(--headless --disable-gpu --start-maximized --disable-web-security --ignore-certificate-errors --disable-popup-blocking --disable-translate --proxy-server=m#{proxy}))
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--ignore-certificate-errors')
+    options.add_argument('--disable-popup-blocking')
+    options.add_argument('--disable-translate')
+    options.add_argument('--start-maximize')
+    options.add_argument('--no-sandbox')
+    options.add_argument("--proxy-server=m#{proxy}")
+    driver = Selenium::WebDriver.for :chrome, options: options
+    browser = Watir::Browser.new :chrome
+    #browser = Watir::Browser.new( :chrome, desired_capabilities: %w(--headless --disable-gpu --start-maximized --disable-web-security --disable-extensions --ignore-certificate-errors --disable-popup-blocking --disable-translate --proxy-server=m#{proxy}))
 
     Watir.default_timeout = 90
     browser.window.maximize
@@ -45,6 +57,7 @@ class ScrapeData < ApplicationJob
         retry
       end
       browser.quit
+      headless.destroy
     end
 
     tryLeft = 6
@@ -95,5 +108,6 @@ class ScrapeData < ApplicationJob
 
       item.save
     browser.quit
+    headless.destroy
   end
 end

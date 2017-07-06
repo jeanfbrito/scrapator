@@ -110,6 +110,7 @@ GEM
     ffi (1.9.18)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
+    headless (2.3.1)
     httpclient (2.8.3)
     i18n (0.8.4)
     inflecto (0.0.2)
@@ -260,6 +261,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise
   enumerize
+  headless
   jbuilder (~> 2.5)
   jquery-rails
   kaminari

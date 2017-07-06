@@ -19,6 +19,7 @@ gem 'rails-settings-ui'
 gem "rails-settings-cached"
 
 gem "chromedriver-helper"
+gem "headless"
 
 gem 'telegram-bot'
 

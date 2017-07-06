@@ -31,9 +31,8 @@ class ScrapeData < ApplicationJob
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--disable-popup-blocking')
     options.add_argument('--disable-translate')
-    options.add_argument('--start-maximize')
     options.add_argument('--no-sandbox')
-    options.add_argument("--proxy-server=m#{proxy}")
+    options.add_argument("--proxy-server=#{proxy}")
     driver = Selenium::WebDriver.for :chrome, options: options
     browser = Watir::Browser.new :chrome
     #browser = Watir::Browser.new( :chrome, desired_capabilities: %w(--headless --disable-gpu --start-maximized --disable-web-security --disable-extensions --ignore-certificate-errors --disable-popup-blocking --disable-translate --proxy-server=m#{proxy}))

@@ -26,7 +26,8 @@ In order to run the project local on your machine you need to install a few
 dependencies:
 
 - Google Chrome (58 or newer)
-- ChromeDriver (`brew install chromedriver`)
+- X11/xvfb (download XQUartz on OSX or `apt-get install xvfb` on linux)
+- ChromeDriver (`brew install chromedriver` on OSX)
 - Download the project and install Gems with `bin/bundle`
 - Create database (`bin/rake db:create db:migrate db:seed`)
 

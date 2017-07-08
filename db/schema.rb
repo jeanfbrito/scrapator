@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170702054259) do
+ActiveRecord::Schema.define(version: 20170708021133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,17 @@ ActiveRecord::Schema.define(version: 20170702054259) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+  end
+
+  create_table "scrape_steps", force: :cascade do |t|
+    t.integer  "scrape_id"
+    t.string   "title",      default: "", null: false
+    t.string   "xpath",      default: "", null: false
+    t.string   "option",     default: "", null: false
+    t.string   "value",      default: "", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["scrape_id"], name: "index_scrape_steps_on_scrape_id", using: :btree
   end
 
   create_table "scrapes", force: :cascade do |t|

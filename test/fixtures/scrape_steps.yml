@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  xpath: MyString
+  option: MyString
+  value: MyString
+
+two:
+  title: MyString
+  xpath: MyString
+  option: MyString
+  value: MyString

@@ -7,8 +7,18 @@
     <%= f.input :xpath %>
     <%= f.input :config_value %>
     <%= f.input :read_value %>
-    <%= f.input :status, :as => :hidden, :input_html => { :value => 0 } %>
+    <%= f.input :status, as: :hidden, input_html: { value: 0 } %>
+  </div>
 
+  <h3>STEPS (if your Scrape requires interaction with forms or something)</h3>
+
+  <div id="scrape_steps">
+    <%= f.simple_fields_for :scrape_steps do |scrape_step| %>
+      <%= render 'scrape_step_fields', f: scrape_step %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'Add Step', f, :scrape_steps, class: 'btn btn-success' %>
+    </div>
   </div>
 
   <div class="form-actions">

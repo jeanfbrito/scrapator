@@ -31,5 +31,11 @@
 
   <dt>Last read:</dt>
   <dd><%= @scrape.last_read %></dd>
+</dl>
 
+<dl class="dl-horizontal">
+  <% @scrape.scrape_steps.each_with_index do |step, index| %>
+    <dt>Step <%= index+1 %>:</dt>
+    <dd><%= step.title %></dd>
+  <% end %>
 </dl>

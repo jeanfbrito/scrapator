@@ -30,6 +30,6 @@ class ScrapeProxy < ApplicationJob
 
     browser.quit
     ScrapeProxy.delay(run_at: 15.minutes.from_now).perform_later
-    system "pkill -f phantom"
+    system "pkill -f chrome"
   end
 end

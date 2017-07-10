@@ -1,5 +1,5 @@
 require 'telegram/bot'
-#require 'headless'
+require 'headless'
 
 class ScrapeData < ApplicationJob
   queue_as :default
@@ -14,8 +14,8 @@ class ScrapeData < ApplicationJob
 
     puts "using proxy: #{proxy}"
 
-    #headless = Headless.new
-    #headless.start
+    headless = Headless.new
+    headless.start
 
     options = Selenium::WebDriver::Chrome::Options.new
     options.add_argument('--user-data-dir=./tmp')
@@ -23,8 +23,8 @@ class ScrapeData < ApplicationJob
     options.add_argument('--disable-popup-blocking')
     options.add_argument('--disable-translate')
     options.add_argument('--no-sandbox')
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
+    #options.add_argument('--headless')
+    #options.add_argument('--disable-gpu')
     options.add_argument("--proxy-server=#{proxy}")
 
     Watir.default_timeout = 180
@@ -53,7 +53,7 @@ class ScrapeData < ApplicationJob
         retry
       end
       @browser.quit
-      #headless.destroy
+      headless.destroy
     end
 
 
@@ -97,7 +97,7 @@ class ScrapeData < ApplicationJob
     # Save and finish browser
     item.save
     @browser.quit
-    #headless.destroy
+    headless.destroy
   end
 
   private

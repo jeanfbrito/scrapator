@@ -18,7 +18,7 @@ class ScrapeProxy < ApplicationJob
 
    puts "proxy=#{ip}:#{port}"
 
-   Setting.proxyIp = ip
+   #Setting.proxyIp = ip
    Setting.proxyIp = "brito.tplinkdns.com"
    Setting.proxyPort = port
 

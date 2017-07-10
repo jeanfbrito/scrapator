@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20170708021133) do
     t.integer  "scrape_id"
     t.string   "title",      default: "", null: false
     t.string   "xpath",      default: "", null: false
-    t.string   "option",     default: "", null: false
+    t.string   "option",     default: ""
     t.string   "value",      default: "", null: false
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false

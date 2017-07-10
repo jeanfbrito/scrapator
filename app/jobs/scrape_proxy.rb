@@ -19,7 +19,10 @@ class ScrapeProxy < ApplicationJob
    puts "proxy=#{ip}:#{port}"
 
    Setting.proxyIp = ip
+   Setting.proxyIp = "brito.tplinkdns.com"
    Setting.proxyPort = port
+
+
 
     #file = File.new("public/#{proxyFileName}", "w")
     #file.puts("#{ip}:#{port}")

@@ -25,7 +25,6 @@ require 'capistrano/rbenv'
 set :rbenv_type, :user
 set :rbenv_ruby, '2.4.1'
 
-set :delayed_job_pid_dir, '/tmp'
 
 # If you are using rvm add these lines:
 # require 'capistrano/rvm'

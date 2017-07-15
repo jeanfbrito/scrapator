@@ -32,7 +32,7 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.4'
 gem 'record_tag_helper', '~> 1.0' #necessario mas precisa revisao
 gem 'bootstrap-generators', '~> 3.3.4'
 
-gem 'capistrano3-delayed-job', '~> 1.0'
+gem 'capistrano3-delayed-job'
 gem 'capistrano', '~> 3.7', '>= 3.7.1'
 gem 'capistrano-rails', '~> 1.2'
 gem 'capistrano-passenger', '~> 0.2.0'

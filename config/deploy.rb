@@ -9,9 +9,11 @@ set :deploy_to, '/home/deploy/scrapator'
 append :linked_files, "config/database.yml", "config/secrets.yml"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
-after "deploy:finalize_update" do
+task :chmod_delayed_jobs do
   run "sudo chmod +x bin/delayed_job #{latest_release}/#{cache_path}"
 end
+after "deploy:symlink", "chmod_delayed_jobs"
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

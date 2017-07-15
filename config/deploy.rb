@@ -9,6 +9,9 @@ set :deploy_to, '/home/deploy/scrapator'
 append :linked_files, "config/database.yml", "config/secrets.yml"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
+after 'deploy:published', 'restart' do
+    invoke 'delayed_job:restart'
+end
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

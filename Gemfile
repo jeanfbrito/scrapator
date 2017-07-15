@@ -39,6 +39,7 @@ gem 'capistrano-passenger', '~> 0.2.0'
 
 # Add this if you're using rbenv
 gem 'capistrano-rbenv', '~> 2.1'
+gem "daemons"
 
 
 # Headless Chrome Gems (used to scrap data)

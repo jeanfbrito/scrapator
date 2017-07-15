@@ -12,7 +12,6 @@ require "capistrano/deploy"
 # require "capistrano/scm/svn"
 # install_plugin Capistrano::SCM::Svn
 # or
-require 'capistrano/delayed_job'
 
 require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
@@ -24,6 +23,11 @@ require 'capistrano/passenger'
 require 'capistrano/rbenv'
 set :rbenv_type, :user
 set :rbenv_ruby, '2.4.1'
+
+
+require 'capistrano/delayed_job'
+
+set :delayed_job_default_hooks, false
 
 
 # If you are using rvm add these lines:

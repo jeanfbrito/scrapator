@@ -26,7 +26,7 @@ set :rbenv_ruby, '2.4.1'
 
 require 'capistrano/delayed_job'
 set :linked_dirs, %w{tmp/pids}
-set :delayed_job_bin_path, 'bin' 
+set :delayed_job_bin_path, 'bin'
 
 set :delayed_job_default_hooks, false
 

@@ -11,7 +11,7 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bund
 
 task :chmod_delayed_jobs do
   on roles(:all) do
-    execute "chmod +x #{current_path}/bin/delayed_job "
+    execute "chmod +x #{current_path}/bin/delayed_job"
   end
 end
 after "passenger:restart", "chmod_delayed_jobs"

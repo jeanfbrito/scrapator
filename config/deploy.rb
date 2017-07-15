@@ -10,10 +10,11 @@ append :linked_files, "config/database.yml", "config/secrets.yml"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
 task :chmod_delayed_jobs do
-  run "sudo chmod +x bin/delayed_job #{latest_release}/#{cache_path}"
+  on roles(:all) do
+    execute "chmod +x #{current_path}/bin/delayed_job "
+  end
 end
-after "deploy:symlink", "chmod_delayed_jobs"
-
+after "passenger:restart", "chmod_delayed_jobs"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

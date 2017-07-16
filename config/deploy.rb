@@ -14,7 +14,17 @@ task :chmod_delayed_jobs do
     execute "chmod +x #{current_path}/bin/delayed_job"
   end
 end
+
+task :renew_jobs do
+  on roles(:all) do
+    execute "cd #{current_path} && RAILS_ENV=production $HOME/.rbenv/bin/rbenv exec bundle exec rake jobs:clear"
+    execute "cd #{current_path} && RAILS_ENV=production $HOME/.rbenv/bin/rbenv exec bundle exec rake scrape:start"
+    end
+end
+
+
 after "passenger:restart", "chmod_delayed_jobs"
+before "deploy:migrate", "renew_jobs"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

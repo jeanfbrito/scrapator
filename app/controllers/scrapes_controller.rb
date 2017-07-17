@@ -25,8 +25,10 @@ class ScrapesController < ApplicationController
 
   def scrape
     ScrapeData.new.delay.perform(params[:id])
+    item = Scrape.find(params[:id])
+    item.status = 4
+    item.save
     redirect_to scrapes_path
-
   end
 
   # POST /scrapes

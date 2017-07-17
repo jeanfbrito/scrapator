@@ -16,6 +16,11 @@
         <th>Last read</th>
         <th>Config value</th>
         <th>Read value</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
 
@@ -29,6 +34,8 @@
           <% elsif scrape.status.changed? %>
             btn-warning
           <% elsif scrape.status.unscraped? %>
+              btn-info
+          <% elsif scrape.status.scheduled? %>
               btn-primary
             <% else %>
             btn-danger

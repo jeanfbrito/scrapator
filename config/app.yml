@@ -2,6 +2,7 @@
 defaults: &defaults
   proxyIp: "brito.tplinkdns.com"
   proxyPort: "3128"
+  showJobs: false
 
 development:
   <<: *defaults

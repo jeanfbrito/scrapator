@@ -7,7 +7,7 @@
 </div>
 
 <div class="table-responsive">
-  <table class="table table-striped table-bordered table-hover">
+  <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th>Name</th>
@@ -16,34 +16,44 @@
         <th>Last read</th>
         <th>Config value</th>
         <th>Read value</th>
-        <th>Screenshot</th>
       </tr>
     </thead>
 
     <tbody>
       <%= content_tag_for(:tr, @scrapes) do |scrape| %>
-        <td><%= scrape.name %></td>
-        <td><%= link_to "Link", scrape.url, target: "_blank" %></td>
-        <td><h4><span class="label
+        <td class="col-md-2"><%= scrape.name %></td>
+        <td class="col-md-1"><%= link_to "Link", scrape.url, target: "_blank" %></td>
+        <td class="col-md-1"><span class="btn
           <% if scrape.status.similar? %>
-            label-success
+            btn-success
           <% elsif scrape.status.changed? %>
-            label-warning
+            btn-warning
           <% elsif scrape.status.unscraped? %>
-              label-primary
+              btn-primary
             <% else %>
-            label-danger
+            btn-danger
           <% end %>
-          "><%= scrape.status.text %></span></h4>
+          btn-sm"><%= scrape.status.text %></span>
         </td>
-        <td><%= time_ago_in_words(scrape.last_read) if scrape.last_read %></td>
-        <td><%= scrape.config_value %></td>
-        <td><%= scrape.read_value %></td>
-        <td><%= link_to "Open", "/screenshots/#{scrape.screenshot}", target: "_blank" if scrape.screenshot %></td>
-        <td><%= link_to 'Scrape', scrape_scrape_path(scrape), method: :post %></td>
-        <td><%= link_to 'Show', scrape %></td>
-        <td><%= link_to 'Edit', edit_scrape_path(scrape) %></td>
-        <td><%= link_to 'Destroy', scrape, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="col-md-1"><%= time_ago_in_words(scrape.last_read) if scrape.last_read %></td>
+        <td class="col-md-2" style="table-layout: fixed;"><%=truncate scrape.config_value.squish, length: 25 %></td>
+        <td class="col-md-3" style="table-layout: fixed;"><%=truncate scrape.read_value.squish, length: 35 %></td>
+        <td><% if scrape.screenshot %>
+          <%= link_to ("/screenshots/#{scrape.screenshot}"), target: "_blank", :class => "btn btn-default btn-sm" do %>
+                <i class="fa fa-picture-o"></i>
+        <% end %><% end %></td>
+        <td><%= link_to scrape_scrape_path(scrape), method: :post, :class => "btn btn-info btn-sm" do%>
+                <i class="fa fa-refresh"></i>
+        <% end %></td>
+        <td><%= link_to scrape, :class => "btn btn-default btn-sm" do %>
+          <i class="fa fa-eye"></i>
+        <% end %></td>
+        <td><%= link_to edit_scrape_path(scrape), :class => "btn btn-primary btn-sm" do %>
+          <i class="fa fa-pencil-square-o"></i>
+        <% end %></td>
+        <td><%= link_to scrape, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-sm" do %>
+          <i class="fa fa-trash"></i>
+        <% end %></td>
       <% end %>
     </tbody>
   </table>

@@ -9,13 +9,15 @@ set :deploy_to, '/home/deploy/scrapator'
 append :linked_files, "config/database.yml", "config/secrets.yml"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
-after "passenger:restart", "chmod_delayed_jobs"
+after "passenger:restart", "chmod_binaries"
 before "deploy:migrate", "renew_jobs"
 after 'deploy:finished', 'telegram:bot:poller:restart'
 
-task :chmod_delayed_jobs do
+task :chmod_binaries do
   on roles(:all) do
     execute "chmod +x #{current_path}/bin/delayed_job"
+    execute "chmod +x #{current_path}/bin/telegram_bot"
+    execute "chmod +x #{current_path}/bin/telegram_bot_ctl"
   end
 end
 

@@ -34,9 +34,9 @@
           <% elsif scrape.status.changed? %>
             btn-warning
           <% elsif scrape.status.unscraped? %>
-              btn-info
-          <% elsif scrape.status.scheduled? %>
               btn-primary
+          <% elsif scrape.status.scheduled? %>
+              btn-info
             <% else %>
             btn-danger
           <% end %>

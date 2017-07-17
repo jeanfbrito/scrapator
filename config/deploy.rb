@@ -9,6 +9,10 @@ set :deploy_to, '/home/deploy/scrapator'
 append :linked_files, "config/database.yml", "config/secrets.yml"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
+after "passenger:restart", "chmod_delayed_jobs"
+before "deploy:migrate", "renew_jobs"
+after 'deploy:finished', 'telegram:bot:poller:restart'
+
 task :chmod_delayed_jobs do
   on roles(:all) do
     execute "chmod +x #{current_path}/bin/delayed_job"
@@ -22,9 +26,34 @@ task :renew_jobs do
     end
 end
 
+namespace :telegram do
+  namespace :bot do
+    namespace :poller do
+      {
+        start:         'start an instance of the application',
+        stop:          'stop all instances of the application',
+        restart:       'stop all instances and restart them afterwards',
+        reload:        'send a SIGHUP to all instances of the application',
+        # run:           'start the application and stay on top',
+        zap:           'set the application to a stopped state',
+        status:        'show status (PID) of application instances',
+      }.each do |action, description|
+        desc description
+        task action do
+          on roles(:app) do
+            within current_path do
+              with rails_env: fetch(:rails_env) do
+                execute :bundle, :exec, 'bin/telegram_bot_ctl', action
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end
 
-after "passenger:restart", "chmod_delayed_jobs"
-before "deploy:migrate", "renew_jobs"
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

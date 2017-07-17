@@ -21,9 +21,9 @@
 
     <tbody>
       <%= content_tag_for(:tr, @scrapes) do |scrape| %>
-        <td class="col-md-2"><%= scrape.name %></td>
-        <td class="col-md-1"><%= link_to "Link", scrape.url, target: "_blank" %></td>
-        <td class="col-md-1"><span class="btn
+        <td class="col-md-3"><%= scrape.name %></td>
+        <td><%= link_to "Link", scrape.url, target: "_blank" %></td>
+        <td><span class="btn
           <% if scrape.status.similar? %>
             btn-success
           <% elsif scrape.status.changed? %>

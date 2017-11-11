@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock "3.8.2"
+#lock "3.8.2"
 
 set :application, "scrapator"
 set :repo_url, "https://github.com/jeanfbrito/scrapator.git"
@@ -18,6 +18,7 @@ task :chmod_binaries do
     execute "chmod +x #{current_path}/bin/delayed_job"
     execute "chmod +x #{current_path}/bin/telegram_bot"
     execute "chmod +x #{current_path}/bin/telegram_bot_ctl"
+    #execute "pkill -f telegram_bot"
   end
 end
 

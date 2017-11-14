@@ -14,28 +14,34 @@ class ScrapeData < ApplicationJob
 
     puts "using proxy: #{proxy}"
 
-    headless = Headless.new
-    headless.start
+    #headless = Headless.new
+    #headless.start
 
-    options = Selenium::WebDriver::Chrome::Options.new
-    options.add_argument('--user-data-dir=./tmp')
-    options.add_argument('--ignore-certificate-errors')
-    options.add_argument('--disable-popup-blocking')
-    options.add_argument('--disable-translate')
-    options.add_argument('--no-sandbox')
-    #options.add_argument('--headless')
-    #options.add_argument('--disable-gpu')
-    options.add_argument("--proxy-server=#{proxy}")
+    # options = Selenium::WebDriver::Chrome::Options.new
+    # options.add_argument('--user-data-dir=./tmp')
+    # options.add_argument('--ignore-certificate-errors')
+    # options.add_argument('--disable-popup-blocking')
+    # options.add_argument('--disable-translate')
+    # options.add_argument('--no-sandbox')
+    # #options.add_argument('--headless')
+    # #options.add_argument('--disable-gpu')
+    # options.add_argument("--proxy-server=#{proxy}")
 
-    Watir.default_timeout = 180
-    begin
-      @browser = Watir::Browser.new(Selenium::WebDriver.for(:chrome, options: options))
-      puts "browser created"
-    rescue
-      system "pkill -f chrome"
-      @browser.quit
-      headless.destroy
-    end
+    #Watir.default_timeout = 180
+
+    @browser = Watir::Browser.new :chrome, :switches => %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate --disable-notifications --start-maximized --disable-gpu --headless --proxy-server=#{proxy}]
+    @browser.driver.manage.timeouts.implicit_wait = 100 # seconds
+
+    # begin
+    #   @browser = Watir::Browser.new(Selenium::WebDriver.for(:chrome, options: options))
+    #   puts "browser created"
+    # rescue
+    #   system "pkill -f chrome"
+    #   @browser.quit
+    #   headless.destroy
+    # end
+
+
 
 
     tryLeft = 3
@@ -61,7 +67,7 @@ class ScrapeData < ApplicationJob
         retry
       end
       @browser.quit
-      headless.destroy
+      #headless.destroy
     end
 
 
@@ -105,7 +111,7 @@ class ScrapeData < ApplicationJob
     # Save and finish browser
     item.save
     @browser.quit
-    headless.destroy
+    #headless.destroy
   end
 
   private

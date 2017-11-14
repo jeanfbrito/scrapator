@@ -30,7 +30,7 @@ class ScrapeData < ApplicationJob
     #Watir.default_timeout = 180
 
     @browser = Watir::Browser.new :chrome, :switches => %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate --disable-notifications --start-maximized --disable-gpu --headless --proxy-server=#{proxy}]
-    @browser.driver.manage.timeouts.implicit_wait = 100 # seconds
+    @browser.driver.manage.timeouts.implicit_wait = 180 # seconds
 
     # begin
     #   @browser = Watir::Browser.new(Selenium::WebDriver.for(:chrome, options: options))
@@ -42,33 +42,33 @@ class ScrapeData < ApplicationJob
     # end
 
 
+@browser.goto(item.url)
 
-
-    tryLeft = 3
-    begin
-      puts "lets go to: #{item.url}"
-      @browser.goto(item.url)
-      if(@browser.url == item.url)
-        tryElementLeft = 6
-        loop do
-          tryElementLeft -= 1
-          sleep 10
-          puts "lets search for the element now!"
-          break if @browser.element(:xpath => item.xpath).present? || tryElementLeft <= 0
-        end
-      else
-        raise "error"
-      end
-    rescue => error
-      tryLeft -= 1
-      puts "something went wrong! #{error}"
-      if tryLeft >= 0
-        sleep 5
-        retry
-      end
-      @browser.quit
-      #headless.destroy
-    end
+    # tryLeft = 3
+    # begin
+    #   puts "lets go to: #{item.url}"
+    #   @browser.goto(item.url)
+    #   if(@browser.url == item.url)
+    #     tryElementLeft = 6
+    #     loop do
+    #       tryElementLeft -= 1
+    #       sleep 10
+    #       puts "lets search for the element now!"
+    #       break if @browser.element(:xpath => item.xpath).present? || tryElementLeft <= 0
+    #     end
+    #   else
+    #     raise "error"
+    #   end
+    # rescue => error
+    #   tryLeft -= 1
+    #   puts "something went wrong! #{error}"
+    #   if tryLeft >= 0
+    #     sleep 5
+    #     retry
+    #   end
+    #   @browser.quit
+    #   #headless.destroy
+    # end
 
 
     if(item.screenshot?)

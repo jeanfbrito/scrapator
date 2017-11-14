@@ -44,31 +44,31 @@ class ScrapeData < ApplicationJob
 
 @browser.goto(item.url)
 
-    # tryLeft = 3
-    # begin
-    #   puts "lets go to: #{item.url}"
-    #   @browser.goto(item.url)
-    #   if(@browser.url == item.url)
-    #     tryElementLeft = 6
-    #     loop do
-    #       tryElementLeft -= 1
-    #       sleep 10
-    #       puts "lets search for the element now!"
-    #       break if @browser.element(:xpath => item.xpath).present? || tryElementLeft <= 0
-    #     end
-    #   else
-    #     raise "error"
-    #   end
-    # rescue => error
-    #   tryLeft -= 1
-    #   puts "something went wrong! #{error}"
-    #   if tryLeft >= 0
-    #     sleep 5
-    #     retry
-    #   end
-    #   @browser.quit
-    #   #headless.destroy
-    # end
+    tryLeft = 3
+    begin
+      puts "lets go to: #{item.url}"
+      @browser.goto(item.url)
+      if(@browser.url == item.url)
+        tryElementLeft = 6
+        loop do
+          tryElementLeft -= 1
+          sleep 10
+          puts "lets search for the element now!"
+          break if @browser.element(:xpath => item.xpath).present? || tryElementLeft <= 0
+        end
+      else
+        raise "error"
+      end
+    rescue => error
+      tryLeft -= 1
+      puts "something went wrong! #{error}"
+      if tryLeft >= 0
+        sleep 5
+        retry
+      end
+      @browser.quit
+      #headless.destroy
+    end
 
 
     if(item.screenshot?)

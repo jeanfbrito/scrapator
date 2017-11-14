@@ -11,13 +11,13 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bund
 
 after "passenger:restart", "chmod_binaries"
 before "deploy:migrate", "renew_jobs"
-after 'deploy:finished', 'telegram:bot:poller:restart'
+#after 'deploy:finished', 'telegram:bot:poller:restart'
 
 task :chmod_binaries do
   on roles(:all) do
     execute "chmod +x #{current_path}/bin/delayed_job"
-    execute "chmod +x #{current_path}/bin/telegram_bot"
-    execute "chmod +x #{current_path}/bin/telegram_bot_ctl"
+    #execute "chmod +x #{current_path}/bin/telegram_bot"
+    #execute "chmod +x #{current_path}/bin/telegram_bot_ctl"
     #execute "pkill -f telegram_bot"
   end
 end

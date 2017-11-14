@@ -28,7 +28,15 @@ class ScrapeData < ApplicationJob
     options.add_argument("--proxy-server=#{proxy}")
 
     Watir.default_timeout = 180
-    @browser = Watir::Browser.new(Selenium::WebDriver.for(:chrome, options: options))
+    begin
+      @browser = Watir::Browser.new(Selenium::WebDriver.for(:chrome, options: options))
+      puts "browser created"
+    rescue
+      system "pkill -f chrome"
+      @browser.quit
+      headless.destroy
+    end
+
 
     tryLeft = 3
     begin

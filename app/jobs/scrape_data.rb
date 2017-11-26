@@ -29,7 +29,7 @@ class ScrapeData < ApplicationJob
 
     #Watir.default_timeout = 180
 
-    @browser = Watir::Browser.new :chrome, :switches => %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate --disable-notifications --start-maximized --disable-gpu --headless --proxy-server=brito.tplinkdns.com:3128]
+    @browser = Watir::Browser.new :chrome, :switches => %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate --disable-notifications --start-maximized --disable-gpu --headless] #--proxy-server=brito.tplinkdns.com:3128]
     @browser.driver.manage.timeouts.implicit_wait = 180 # seconds
 
     # begin

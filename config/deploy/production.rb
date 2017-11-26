@@ -1,6 +1,12 @@
 # Replace 127.0.0.1 with your server's IP address!
-server '163.172.141.48', user: 'deploy', roles: %w{app db web}
+server 'ec2-18-231-42-73.sa-east-1.compute.amazonaws.com', user: 'ubuntu', roles: %w{app db web}
 
+set :ssh_options, {
+  forward_agent: true,
+  user: fetch(:user),
+  auth_methods: ["publickey"],
+  keys: ["/vagrant/amazon.pem"]
+}
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.

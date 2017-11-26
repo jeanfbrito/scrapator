@@ -22,7 +22,7 @@ require 'capistrano/passenger'
 # If you are using rbenv add these lines:
 require 'capistrano/rbenv'
 set :rbenv_type, :user
-set :rbenv_ruby, '2.4.1'
+set :rbenv_ruby, '2.4.2'
 
 require 'capistrano/delayed_job'
 set :linked_dirs, %w{tmp/pids}

@@ -4,7 +4,7 @@
 set :application, "scrapator"
 set :repo_url, "https://github.com/jeanfbrito/scrapator.git"
 
-set :deploy_to, '/home/deploy/scrapator'
+set :deploy_to, '/home/ubuntu/scrapator'
 
 append :linked_files, "config/database.yml", "config/secrets.yml"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"

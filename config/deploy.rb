@@ -24,8 +24,8 @@ end
 
 task :renew_jobs do
   on roles(:all) do
-    #execute "cd #{current_path} && RAILS_ENV=production $HOME/.rbenv/bin/rbenv exec bundle exec rake jobs:clear"
-    #execute "cd #{current_path} && RAILS_ENV=production $HOME/.rbenv/bin/rbenv exec bundle exec rake scrape:start"
+    execute "cd #{current_path} && RAILS_ENV=production $HOME/.rbenv/bin/rbenv exec bundle exec rake jobs:clear"
+    execute "cd #{current_path} && RAILS_ENV=production $HOME/.rbenv/bin/rbenv exec bundle exec rake scrape:start"
     end
 end
 

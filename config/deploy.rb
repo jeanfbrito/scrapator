@@ -10,7 +10,7 @@ append :linked_files, "config/database.yml", "config/secrets.yml"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
 after "passenger:restart", "chmod_binaries"
-before "deploy:migrate", "renew_jobs"
+after "deploy:published", "renew_jobs"
 #after 'deploy:finished', 'telegram:bot:poller:restart'
 
 task :chmod_binaries do
@@ -24,8 +24,8 @@ end
 
 task :renew_jobs do
   on roles(:all) do
-    execute "cd #{current_path} && RAILS_ENV=production $HOME/.rbenv/bin/rbenv exec bundle exec rake jobs:clear"
-    execute "cd #{current_path} && RAILS_ENV=production $HOME/.rbenv/bin/rbenv exec bundle exec rake scrape:start"
+    #execute "cd #{current_path} && RAILS_ENV=production $HOME/.rbenv/bin/rbenv exec bundle exec rake jobs:clear"
+    #execute "cd #{current_path} && RAILS_ENV=production $HOME/.rbenv/bin/rbenv exec bundle exec rake scrape:start"
     end
 end
 

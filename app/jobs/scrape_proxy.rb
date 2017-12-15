@@ -35,5 +35,10 @@ class ScrapeProxy < ApplicationJob
     #browser.quit
     ScrapeProxy.delay(run_at: 15.minutes.from_now).perform_later
     system "pkill -f chrome"
+
+    clean_tmp('./tmp/chrome')
+  end
+  def clean_tmp(dir_path)
+    FileUtils.rm_rf("#{dir_path}/.", secure: true)
   end
 end
